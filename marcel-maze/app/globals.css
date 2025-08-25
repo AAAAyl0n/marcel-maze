@@ -51,8 +51,8 @@ body {
 
 .options {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin: 16px 0 24px;
 }
 
@@ -60,7 +60,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-radius: 12px;
   border: 1px solid var(--muted);
   background: rgba(255, 255, 255, 0.04);
@@ -68,9 +68,20 @@ body {
   user-select: none;
 }
 
+/* 取消选中高亮，仅保持边框 */
 .option.selected {
-  border-color: var(--accent);
-  background: rgba(227, 93, 106, 0.18);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.options-flat .option {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.options-flat .option.selected {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.16);
 }
 
 .actions {
@@ -103,6 +114,37 @@ body {
   cursor: not-allowed;
 }
 
+/* Flat selects and inputs: remove focus highlights and system styles */
+.card select,
+.card button,
+.card input[type="checkbox"] {
+  outline: none;
+  box-shadow: none;
+}
+
+.card select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid var(--muted);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--fg-on-dark);
+}
+
+.card select:focus,
+.card button:focus,
+.card input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--muted);
+}
+
+/* Try to keep dropdown panel dark (note: platform-dependent) */
+.card select option {
+  background-color: var(--bg-dark-red);
+  color: var(--fg-on-dark);
+}
+
 /* Progress bar */
 .progress {
   width: 100%;
@@ -117,7 +159,7 @@ body {
   height: 100%;
   background: linear-gradient(90deg, var(--accent), #ffd1d6);
   width: 0%;
-  transition: width 160ms ease;
+  transition: width 60ms ease-out;
 }
 
 
